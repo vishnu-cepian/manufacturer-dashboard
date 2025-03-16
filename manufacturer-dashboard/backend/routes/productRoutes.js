@@ -14,7 +14,6 @@ router.post("/register", authMiddleware, async (req, res) => {
     const { productName, serialNumber, batch } = req.body;
     const companyName = req.user.companyName;
   
-    // 1️⃣ Upload Data to IPFS
     const productData = { productName, serialNumber, batch, companyName };
     const qrhash = crypto.createHash("sha256").update(JSON.stringify(productData)).digest("hex");
 
@@ -25,18 +24,16 @@ router.post("/register", authMiddleware, async (req, res) => {
     const finalQRHash = crypto.createHash("sha256").update(JSON.stringify(finalQRData)).digest("hex");
     console.log(finalQRData)
     
-    // 3️⃣ Store CID & Hash on Blockchain
     try{
       const txHash = await registerProductOnBlockchain(companyName,finalQRHash);
     } catch (error) {
       return res.status(400).json({ success: false, message: error.message });
     }
 
-    // 4️⃣ Generate QR Code (Contains CID & Hash)
     const qrContent = JSON.stringify({ ipfsCID, qrhash });
     const qrCode = await QRCode.toDataURL(qrContent);
 
-    // 5️⃣ Save Product in Database
+
     const newProduct = new Product({
       productName,
       serialNumber,
