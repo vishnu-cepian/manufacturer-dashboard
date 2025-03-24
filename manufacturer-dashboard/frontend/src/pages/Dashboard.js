@@ -26,7 +26,7 @@ const Dashboard = () => {
   }, [navigate]);
 
   return (
-    <div>
+    <div className="dashBoard">
       <h2>Welcome, {user?.name}</h2>
       <p>Company: {user?.companyName}</p>
       <button onClick={() => { localStorage.removeItem("token"); navigate("/login"); }}>Logout</button>

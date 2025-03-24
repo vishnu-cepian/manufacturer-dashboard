@@ -25,7 +25,7 @@ const MyProducts = () => {
     }, []);
 
     return (
-        <div>
+        <div className='myProducts'>
             <h2>My Registered Products</h2>
             {loading ? <p>Loading...</p> : error ? <p>{error}</p> : (
                 <ul>

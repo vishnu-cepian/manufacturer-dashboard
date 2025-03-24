@@ -21,7 +21,7 @@ const Signup = () => {
   };
 
   return (
-    <div>
+    <div className="sign">
       <h2>Signup</h2>
       <form onSubmit={handleSubmit}>
         <input type="text" name="name" placeholder="Name" onChange={handleChange} required />

@@ -45,7 +45,7 @@ const RegisterProduct = () => {
   };
 
   return (
-    <div>
+    <div className="registerProduct">
       <h2>Register Product</h2>
       <form onSubmit={handleSubmit}>
         <input type="text" name="productName" placeholder="Product Name" onChange={handleChange} required />
