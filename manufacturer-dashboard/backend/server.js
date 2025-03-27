@@ -28,6 +28,9 @@ app.use("/api/auth", authRoutes);
 const productRoutes = require("./routes/productRoutes");
 app.use("/api/products", productRoutes);
 
+const companyRoutes = require("./routes/companyRoutes");
+app.use("/api", companyRoutes); 
+
 // Start Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

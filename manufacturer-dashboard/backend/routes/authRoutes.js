@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const CompanyNames = require("../models/CompanyNames");
 
 const router = express.Router();
 
@@ -22,6 +23,11 @@ router.post("/signup", async (req, res) => {
     // Create user
     user = new User({ name, email, password: hashedPassword, companyName });
     await user.save();
+
+    const existingCompany = await CompanyNames.findOne({ name: companyName });
+    if (!existingCompany) {
+        await CompanyNames.create({ name: companyName }); 
+    }
 
     // Generate token
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
