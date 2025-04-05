@@ -8,7 +8,6 @@ const { registerProductOnBlockchain } = require("../utils/blockchainUtils");
 
 const router = express.Router();
 
-// Register Product
 router.post("/register", authMiddleware, async (req, res) => {
   try {
     const { productName, serialNumber, batch } = req.body;
